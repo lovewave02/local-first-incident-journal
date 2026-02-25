@@ -8,7 +8,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
-    "dev:example": "tsx examples/mvp-flow.ts"
+    "dev:example": "tsx examples/mvp-flow.ts",
+    "dev:server": "tsx src/server.ts"
   },
   "keywords": [
     "local-first",
