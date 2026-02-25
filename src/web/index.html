@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local-First Incident Journal</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="panel hero">
+        <h1>Local-First Incident Journal</h1>
+        <p>인시던트 타임라인을 입력하면 포스트모템 초안을 즉시 생성합니다.</p>
+      </section>
+
+      <section class="panel form-panel">
+        <h2>새 인시던트 초안</h2>
+        <form id="incidentForm">
+          <input id="incidentId" placeholder="Incident ID (예: INC-2026-001)" required />
+          <input id="title" placeholder="Incident title" required />
+          <select id="severity">
+            <option value="sev0">sev0</option>
+            <option value="sev1">sev1</option>
+            <option value="sev2" selected>sev2</option>
+            <option value="sev3">sev3</option>
+          </select>
+          <textarea id="events" placeholder="이벤트를 한 줄에 하나씩 입력: kind|author|text\n예) detected|alice|API 5xx 증가" required></textarea>
+          <button type="submit">포스트모템 생성</button>
+        </form>
+      </section>
+
+      <section class="panel output-panel">
+        <h2>생성 결과</h2>
+        <pre id="output">아직 생성된 결과가 없습니다.</pre>
+      </section>
+    </main>
+
+    <script src="/main.js"></script>
+  </body>
+</html>
