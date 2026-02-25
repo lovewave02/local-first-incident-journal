@@ -1,9 +1,11 @@
 import { createServer } from 'node:http';
+import type { IncomingMessage, ServerResponse } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { LocalIncidentJournal, generatePostmortem } from './index.js';
+import type { IncidentEventKind } from './index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -43,7 +45,7 @@ function demoPayload() {
   };
 }
 
-async function serveStatic(url: string, res: import('node:http').ServerResponse) {
+async function serveStatic(url: string, res: ServerResponse) {
   const fileName = url === '/' ? 'index.html' : url.slice(1);
   const filePath = path.join(webDir, fileName);
   try {
@@ -58,7 +60,7 @@ async function serveStatic(url: string, res: import('node:http').ServerResponse)
   }
 }
 
-createServer(async (req, res) => {
+createServer(async (req: IncomingMessage, res: ServerResponse) => {
   const method = req.method ?? 'GET';
   const url = req.url ?? '/';
 
@@ -80,7 +82,7 @@ createServer(async (req, res) => {
 
   if (method === 'POST' && url === '/api/postmortem') {
     let raw = '';
-    req.on('data', (chunk) => {
+    req.on('data', (chunk: Buffer) => {
       raw += chunk.toString();
     });
     req.on('end', () => {
@@ -89,7 +91,7 @@ createServer(async (req, res) => {
           incidentId: string;
           title: string;
           severity: 'sev0' | 'sev1' | 'sev2' | 'sev3';
-          events: Array<{ kind: any; author: string; text: string }>;
+          events: Array<{ kind?: IncidentEventKind; author: string; text: string }>;
         };
 
         const journal = new LocalIncidentJournal(payload.incidentId, payload.title, payload.severity ?? 'sev2');
