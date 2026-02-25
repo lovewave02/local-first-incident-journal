@@ -9,22 +9,67 @@
   <body>
     <main class="wrap">
       <section class="panel hero">
+        <p class="kicker">INCIDENT RESPONSE TOOL</p>
         <h1>Local-First Incident Journal</h1>
-        <p>인시던트 타임라인을 입력하면 포스트모템 초안을 즉시 생성합니다.</p>
+        <p>
+          장애 대응 중 메모를 빠르게 남기면, 타임라인을 자동 정리해 포스트모템 초안을 즉시 생성합니다.
+          목표는 "기록 누락 최소화 + 문서화 시간 단축"입니다.
+        </p>
+      </section>
+
+      <section class="panel guide">
+        <h2>빠른 사용법 (1분)</h2>
+        <ol>
+          <li><strong>ID/제목/심각도</strong>를 입력합니다.</li>
+          <li><strong>이벤트를 줄 단위</strong>로 입력합니다: <code>kind|author|text</code></li>
+          <li><strong>포스트모템 생성</strong>을 누르면 하단에 초안이 생성됩니다.</li>
+        </ol>
+        <div class="kinds">
+          <span>kind 예시</span>
+          <code>detected</code>
+          <code>impact_update</code>
+          <code>mitigation</code>
+          <code>root_cause_note</code>
+          <code>recovery</code>
+          <code>action_item</code>
+        </div>
       </section>
 
       <section class="panel form-panel">
-        <h2>새 인시던트 초안</h2>
+        <div class="form-head">
+          <h2>인시던트 입력</h2>
+          <button id="fillExampleBtn" type="button" class="secondary">예시 자동 채우기</button>
+        </div>
         <form id="incidentForm">
-          <input id="incidentId" placeholder="Incident ID (예: INC-2026-001)" required />
-          <input id="title" placeholder="Incident title" required />
-          <select id="severity">
-            <option value="sev0">sev0</option>
-            <option value="sev1">sev1</option>
-            <option value="sev2" selected>sev2</option>
-            <option value="sev3">sev3</option>
-          </select>
-          <textarea id="events" placeholder="이벤트를 한 줄에 하나씩 입력: kind|author|text\n예) detected|alice|API 5xx 증가" required></textarea>
+          <label>
+            Incident ID
+            <input id="incidentId" placeholder="예: INC-2026-001" required />
+          </label>
+
+          <label>
+            Incident Title
+            <input id="title" placeholder="예: API Gateway timeout spike" required />
+          </label>
+
+          <label>
+            Severity
+            <select id="severity">
+              <option value="sev0">sev0</option>
+              <option value="sev1">sev1</option>
+              <option value="sev2" selected>sev2</option>
+              <option value="sev3">sev3</option>
+            </select>
+          </label>
+
+          <label>
+            Event Lines
+            <textarea id="events" placeholder="형식: kind|author|text&#10;예) detected|alice|API 5xx 증가" required></textarea>
+          </label>
+
+          <p id="hint" class="hint">
+            팁: 한 줄이 타임라인 한 이벤트가 됩니다. 작성자가 다르면 회고 시 책임/협업 흐름을 더 쉽게 추적할 수 있습니다.
+          </p>
+
           <button type="submit">포스트모템 생성</button>
         </form>
       </section>
