@@ -1,5 +1,9 @@
-import { health } from '../src/index';
+import { describe, expect, it } from 'vitest';
 
-if (health().status !== 'ok') {
-  throw new Error('health check failed');
-}
+import { health } from '../src/index.js';
+
+describe('health', () => {
+  it('returns ok', () => {
+    expect(health().status).toBe('ok');
+  });
+});

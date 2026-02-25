@@ -1,0 +1,25 @@
+{
+  "name": "local-first-incident-journal",
+  "version": "0.1.0",
+  "description": "Offline-first incident journal MVP with deterministic merge and postmortem generation",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "dev:example": "tsx examples/mvp-flow.ts"
+  },
+  "keywords": [
+    "local-first",
+    "incident",
+    "crdt",
+    "portfolio"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vitest": "^2.1.9"
+  }
+}
